@@ -1,35 +1,63 @@
- 
 <?php 
-$product_id=$_GET['purchase'];
-$user_no=$gid;
-?>
- <div  style="" class="card col-lg-4 o-hidden border-0 shadow-lg my-5">
-  <div class="card-body p-0">
-    <!-- Nested Row within Card Body -->
-    <div class="row">
-      <div class="col-lg-12">
-        <div class="p-5">
-          <div class="text-center">
-            <h1 class="h4 text-gray-900 mb-4">Confirm with the bill number</h1>
-          </div>
-          <form action="include/buy.php" method="post" enctype='multipart/form-data' class="user">
-            <div class="form-group row">
-              <div class="col-sm-12 mb-12 mb-sm-0">
-                <input type="text" name="billno" class="form-control form-control-user" placeholder="Enter Bill Number" required>
-              </div>
-               <div class="col-sm-6 mb-3 mb-sm-0" style="display: none;">
-                <input type="text" name="productId" value="<?php echo $product_id; ?>"   class="form-control form-control-user" placeholder="Subject">
-              </div>
-               <div class="col-sm-6 mb-3 mb-sm-0" style="">
-                <input type="hidden" name="user_no" value="<?php echo $gid; ?>" class="form-control form-control-user" >
-              </div>
-            </div>
-            <button type="submit" class="btn btn-primary btn-user btn-block">
-              Send
-            </button>
-          </form>
-        </div>
+
+  $product_id=$_GET['purchase'];
+  $user_no=$gid;
+
+  $phone_no=getAccountInfoBygid($gid,'phone');
+  $email=getAccountInfoBygid($gid,'email');
+
+  $oid=$product_id;
+  $amount=getProductById($product_id,'price');
+
+   
+  $fields = array("live"=> "1",
+                    "oid"=> $oid,
+                    "inv"=> $oid,
+                    "ttl"=> $amount,
+                    "tel"=> $phone_no,
+                    "eml"=> $email,
+                    "vid"=> "bservices",
+                    "curr"=> "KES",
+                    "p1"=> "mpesa",
+                    "p2"=> "020102292999",
+                    "p3"=> "",
+                    "p4"=> "",
+                    "cbk"=> $_SERVER["HTTP_HOST"].$_SERVER["REQUEST_URI"],
+                    "cst"=> "1",
+                    "crl"=> "0"
+                    );
+    /*
+    The datastring IS concatenated from the data above
+    */
+
+    $datastring =  $fields['live'].$fields['oid'].$fields['inv'].$fields['ttl'].$fields['tel'].$fields['eml'].$fields['vid'].$fields['curr'].$fields['p1'].$fields['p2'].$fields['p3'].$fields['p4'].$fields['cbk'].$fields['cst'].$fields['crl'];
+    $hashkey ="trF9wqE55xzba";//use "demoCHANGED" for testing where vid is set to "demo"
+
+    /********************************************************************************************************
+    * Generating the HashString sample
+    */
+    $generated_hash = hash_hmac('sha1',$datastring , $hashkey);
+
+    ?>
+
+  
+
+  <div class="col-lg-6 col-md-6 col-sm-6 col-12">
+    <div class="card card-statistic-1">
+    
+      <div class="card-wrap" style="padding: 40px;">
+           <FORM action="https://payments.ipayafrica.com/v3/ke">
+              <?php  
+                   foreach ($fields as $key => $value) {
+                  
+                       echo '<input name="'.$key.'" type="hidden" value="'.$value.'">';
+                   }
+              ?>
+              <INPUT name="hsh" type="hidden" value="<?php echo $generated_hash ?>">
+              <button type="submit"  class="btn btn-primary">  Comfirm  </button>
+          </FORM>
       </div>
+      <h4 style="padding:40px;">To finish the purchase</h4>
     </div>
   </div>
-</div>
+           

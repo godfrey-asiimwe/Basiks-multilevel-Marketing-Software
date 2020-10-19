@@ -155,6 +155,11 @@
                     </div>
                     </div>
                   </div>
+                   
+                    <div class="form-group col-6">
+                      <label>Terms and conditions</label>
+                      <input type="checkbox" name="checkbox" class="form-control">
+                    </div>
 
                   <div class="form-group">
                     <button type="submit" class="btn btn-primary btn-lg btn-block">
@@ -163,6 +168,8 @@
                   </div>
                 </form>
               </div>
+               <div class="mt-5 text-center">
+               You have an account? <a href="login.php">Log in here</a> 
             </div>
             <div class="simple-footer">
               Copyright &copy; Basiks 2020

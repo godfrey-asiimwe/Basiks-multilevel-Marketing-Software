@@ -37,9 +37,9 @@ function findAdmin(){
 function phoneNumberUg($phone){
   $len=strlen($phone);
   if($len==10 and substr($phone,0,1)==0){
-    $phone='+256'.substr($phone,1);
+    $phone='256'.substr($phone,1);
   } else if($len==9){
-    $phone='+256'.$phone;
+    $phone='256'.$phone;
   } else{
     $phone=$phone;
   }
@@ -49,7 +49,7 @@ function phoneNumberUg($phone){
 function phoneNumberKe($phone){
   $len=strlen($phone);
   if($len==10 and substr($phone,0,1)==0){
-    $phone='+254'.substr($phone,1);
+    $phone='254'.substr($phone,1);
   } else if($len==9){
     $phone='254'.$phone;
   } else{
@@ -61,7 +61,7 @@ function phoneNumberKe($phone){
 function phoneNumberTz($phone){
   $len=strlen($phone);
   if($len==10 and substr($phone,0,1)==0){
-    $phone='+255'.substr($phone,1);
+    $phone='255'.substr($phone,1);
   } else if($len==9){
     $phone='255'.$phone;
   } else{
@@ -73,7 +73,7 @@ function phoneNumberTz($phone){
 function phoneNumberRw($phone){
   $len=strlen($phone);
   if($len==10 and substr($phone,0,1)==0){
-    $phone='+250'.substr($phone,1);
+    $phone='250'.substr($phone,1);
   } else if($len==9){
     $phone='250'.$phone;
   } else{
@@ -530,7 +530,7 @@ function getAllProductsForDisplay(){
                     <td><?php echo $row2["price"];?></td>
                     <td><?php echo $row2["category"];?></td>
                     <td>
-                       <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit" href="product.php?editLevel=<?php echo $row2["tid"];?>"><i class="fas fa-pencil-alt"></i></a>
+                       <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit" href="product.php?editLevel=<?php echo $row2["id"];?>"><i class="fas fa-pencil-alt"></i></a>
                     </td>
 
                      <td>
@@ -1096,6 +1096,142 @@ function getAllEarningsForMonth(){
   return $d['total'];
 }
 
+
+/*Stockist*/
+
+/*returning users for display*/
+function getAllStockists(){
+   $sql4 ="SELECT * FROM Stockist ";
+           $result2 = mysqli_query(db_connection(), $sql4);
+
+           if (mysqli_num_rows($result2) > 0) {
+              while($row2 = mysqli_fetch_assoc($result2)) {
+                $id=$row2["id"];
+
+                ?>
+
+                  <tr>
+                  
+                    <td><?php echo $row2["name"];?></td>
+                    <td><?php echo $row2["phone"];?></td>
+                    <td><?php echo $row2["address"];?></td>
+                    <td><?php echo $row2["amount"];?></td>
+                    <td><?php echo $row2["info"];?></td>
+                      <td>
+                       <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="<?php echo $row2["status"];?>" href="stockist.php?disableStockist=<?php echo $row2["id"];?>"><i class="fas fa-pencil-alt"></i></a>
+                    </td>
+                    <td>
+                       <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit" href="stockist.php?editStockist=<?php echo $row2["id"];?>"><i class="fas fa-pencil-alt"></i></a>
+                    </td>
+
+                     <td>
+
+                      <a href="stockist.php?deleteStockist=<?php echo $row2["id"];?>" class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete"  data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
+
+                     </td>
+                  </tr>
+                <?php
+
+              }
+           } 
+}
+
+
+function getStockistInfo($itemID,$info){
+
+  $sql = "SELECT $info FROM Stockist WHERE  id='$itemID'";
+    $result = mysqli_query(db_connection(), $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+            $data=$row["$info"];
+           return $data;
+        }
+    } else {
+        
+    }
+
+}
+
+
+/*returning users for display*/
+function getAllProductsForStockist(){
+   $sql4 ="SELECT * FROM products ";
+   $result2 = mysqli_query(db_connection(), $sql4);
+
+   if (mysqli_num_rows($result2) > 0) {
+      while($row2 = mysqli_fetch_assoc($result2)) {
+        $id=$row2["id"];
+
+        ?>
+
+          <tr>
+            <td class="text-left"><img src="../admin/upload/<?php echo $row2["image"];?>" style="width:100px;"></td>
+            <td><?php echo $row2["name"];?></td>
+            <td><?php echo $row2["info"];?></td>
+            <td><?php echo $row2["price"];?></td>
+            <td><?php echo $row2["category"];?></td>
+            <td>
+               <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit" href="product.php?editLevel=<?php echo $row2["tid"];?>"><i class="fas fa-pencil-alt"></i></a>
+            </td>
+          </tr>
+        <?php
+
+      }
+   } 
+}
+
+
+function getAllPurchasesForStockist(){
+   $sql4 ="SELECT * FROM purchase WHERE status='new'";
+   $result2 = mysqli_query(db_connection(), $sql4);
+
+   if (mysqli_num_rows($result2) > 0) {
+      while($row2 = mysqli_fetch_assoc($result2)) {
+
+        $id=$row2["tid"];
+        $billno=$row2["bill_no"];
+        $productName=$row2["name"];
+        $userno=$row2["user_no"];
+        $amount=$row2["amount"];
+        $date=$row2["entry_date"];
+
+        $firstname=getAccountInfoBygid($userno,'firstname');
+        $lastname=getAccountInfoBygid($userno,'lastname');
+        $name=$firstname. "  ".$lastname;
+
+        ?>
+          <tr>
+            <td class="text-left"><?php echo $billno;?></td>
+            <td><?php echo $name;?></td>
+            <td><?php echo $productName;?></td>
+            <td><?php echo number_format($amount);?></td>
+            <td><?php echo $date;?></td>
+             <td>
+               <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Mark Bought" href="index.php?editPurchase=<?php echo $row2["tid"];?>"><i class="fas fa-pencil-alt"></i></a>
+            </td>
+          </tr>
+        <?php
+
+      }
+   } 
+}
+
+
+//network Json output
+function getDownlineJson($id){
+
+   $sql3 ="SELECT * FROM relationship WHERE upline='$id'";
+   $result = mysqli_query(db_connection(), $sql3);
+
+   if (mysqli_num_rows($result) > 0) {
+      while($row = mysqli_fetch_assoc($result)) {
+        $downline=$row["downline"];
+
+        echo $downline.'<br>';
+      }
+   }  
+}
 
 
 ?>

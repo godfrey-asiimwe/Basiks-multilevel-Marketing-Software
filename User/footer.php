@@ -28,6 +28,7 @@
     </div>
   </div>
 
+
   <!-- General JS Scripts -->
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
@@ -102,6 +103,40 @@
       });  
 
  });  
+
+  $(document).ready(function(){
+
+    $('#invite').on('click', function(){
+    if($('#email').val() == ""){
+        alert('Please enter email first');
+      }else{
+        
+        $email = $('#email').val();
+        $id=$('#id').val();
+        
+        $.ajax({
+
+          type: "POST",
+          url: "invite_user.php",
+          data: {
+
+            email:$email,
+            id:$id,
+
+
+          },
+          success: function(){
+
+            $("#invite_form")[0].reset();
+
+            alert("Invitation Successfully Sent");
+
+          }
+        });
+
+      } 
+    });
+  });
  </script>
 
 </body>

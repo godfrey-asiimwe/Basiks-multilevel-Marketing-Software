@@ -1,7 +1,5 @@
 <?php
 session_start();
-// Change this to your connection info.
-
 ?>
 
 <!DOCTYPE html>
@@ -58,8 +56,7 @@ session_start();
                   $stmt->fetch();
                   // Account exists, now we verify the password.
                   // Note: remember to use password_hash in your registration file to store the hashed passwords.
-                  if (password_verify($_POST['password'], $password)) {
-                    // Verification success! User has loggedin! if ($_POST['password'] === $password) {
+                  if (md5($_POST['password']) === $password) {
                     // Create sessions so we know the user is logged in, they basically act like cookies but remember the data on the server.
                     session_regenerate_id();
                     $_SESSION['loggedin'] = TRUE;
@@ -80,10 +77,9 @@ session_start();
 
               }
             }
-              /*$stmt->close();*/
-
              ?>
             <form method="POST" action="<?php echo $_SERVER['SCRIPT_NAME']?>" class="needs-validation" novalidate="">
+
               <div class="form-group">
                 <label for="email">Email</label>
                 <input id="email" type="email" class="form-control" name="email" tabindex="1" required autofocus>
@@ -101,30 +97,25 @@ session_start();
                   please fill in your password
                 </div>
               </div>
-<!-- 
-              <div class="form-group">
-                <div class="custom-control custom-checkbox">
-                  <input type="checkbox" name="remember" class="custom-control-input" tabindex="3" id="remember-me">
-                  <label class="custom-control-label" for="remember-me">Remember Me</label>
-                </div>
-              </div> -->
 
               <div class="form-group text-right">
-              <!--   <a href="auth-forgot-password.html" class="float-left mt-3">
-                  Forgot Password?
-                </a> -->
                 <button type="submit" name="submit" class="btn btn-primary btn-lg btn-icon icon-right" tabindex="4">
                   Login
                 </button>
               </div>
 
-              <div class="mt-5 text-center">
-                Don't have an account? <a href="register.html">Create new one</a>
+               <div class="mt-5 text-left">
+                Forgot Password? <a href="forgotpassword.php">Password Reset</a> 
               </div>
-            </form>
 
+              <div class="mt-5 text-center">
+                Don't have an account? <a href="register.php">Create new one</a> Stockist? <a href="stock.php">Login as a stockist</a>
+              </div>
+
+            </form>
           </div>
         </div>
+
         <div class="col-lg-8 col-12 order-lg-2 order-1 min-vh-100 background-walk-y position-relative overlay-gradient-bottom" data-background="assets2/img/s42.jpg">
           <div class="absolute-bottom-left index-2">
             <div class="text-light p-5 pb-2">
@@ -137,7 +128,7 @@ session_start();
 			        if (hr >= 0 && hr < 12) {
 			            document.write("Good Morning!");
 			        } else if (hr == 12) {
-			            document.write("Good Noon!");
+			            document.write("Good Afternoon!");
 			        } else if (hr >= 12 && hr <= 17) {
 			            document.write("Good Afternoon!");
 			        } else {

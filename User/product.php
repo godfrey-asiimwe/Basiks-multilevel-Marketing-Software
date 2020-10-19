@@ -42,7 +42,9 @@
             <?php 
                 if(isset($_GET['purchase'])){
                     include_once 'purchase.php';
-                }
+                }if(isset($_GET['purchasefinal'])){
+                    include_once 'purchasefinal.php';
+                }else{
 
              ?>
            
@@ -75,6 +77,9 @@
               </div>
             </div>
           </div>
+        <?php
+          }
+        ?>
    </section>
   </div>
    <!-- Logout Modal-->

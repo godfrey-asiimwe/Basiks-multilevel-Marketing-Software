@@ -9,6 +9,10 @@
                   <li class=""><a class="nav-link" href="compensation.php"><i class="fas fa-dollar-sign"></i><span>Default Amounts</span></a></li>
                 </ul>
               </li>
+               <li class="menu-header">Stockist</li>
+             
+              <li><a class="nav-link" href="stockist.php"><i class="fas fa-shopping-bag"></i> <span>Stockist</span></a></li>
+
               <li class="menu-header">Products</li>
              
               <li><a class="nav-link" href="product.php"><i class="fas fa-shopping-bag"></i> <span>Products</span></a></li>
