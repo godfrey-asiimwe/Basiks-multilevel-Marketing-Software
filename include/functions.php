@@ -1,7 +1,5 @@
 <?php
-
 // Change this to your connection info.
-
 function db_connection(){
 	// Change this to your connection info
 	$DATABASE_HOST = 'localhost';
@@ -1233,5 +1231,11 @@ function getDownlineJson($id){
    }  
 }
 
+
+function link2($player_password,$nick,$msisdn,$email,$dateofbirth,$skillpod_player_id,$gender,$gid){
+
+    echo 'https://www.multiplayergameserver.com/xmlapi7/xmlapi.php?site_id=889&password=R6Kz2x7yT1&nocompress=true&action=register_player&nick='.$nick.'&msisdn='.$msisdn.'&player_password='.$player_password.'&email='.$email.'&gender='.$gender.'&date_of_birth='.$dateofbirth.'&skillpod_player_id='.$gid.'';
+
+}
 
 ?>

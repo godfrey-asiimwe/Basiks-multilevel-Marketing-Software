@@ -93,7 +93,7 @@ if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE email = ? and
 			        if(mysqli_query($con, $sql2)){
 					    echo "Records added successfully.";
 					} else{
-					    echo "ERROR: Could not able to execute $sql. " . mysqli_error($con);
+					    echo "ERROR: Could not able to execute sql. " . mysqli_error($con);
 					}
 
 			    }else{
