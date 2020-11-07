@@ -61,104 +61,10 @@
               <div class="card-header"><h4>Register</h4></div>
 
               <div class="card-body">
-                <form method="POST" action="include/register.php">
-                  <div class="row">
-                    <div class="form-group col-6">
-                      <label for="frist_name">First Name</label>
-                      <input id="frist_name" type="text" class="form-control" name="firstname" autofocus>
-                    </div>
-                    <div class="form-group col-6">
-                      <label for="last_name">Last Name</label>
-                      <input id="last_name" type="text" class="form-control" name="lastname">
-                    </div>
-                  </div>
-                  <div class="row">
-                      
-                      <div class="form-group col-6">
-                          <label for="email">Email</label>
-                          <input id="email" type="email" class="form-control" name="email">
-                          <div class="invalid-feedback"></div>
-                      </div>
-
-                      <div class="form-group col-6">
-                          <label>Date of Birth</label>
-                          <input type="date" class="form-control selectric" name="dateofbirth" id="dateofbirth" placeholder="">
-                      </div>
-                  </div>
-
-                  <div class="form-divider">
-                    Your Home
-                  </div>
-                  <div class="row">
-                    <div class="form-group col-6">
-                      <label>Gender</label>
-                      <select class="form-control selectric" name="gender">
-                        <option>Female</option>
-                        <option>Male</option>
-                      </select>
-                    </div>
-                     <div class="form-group col-6">
-                      <label>Select Country</label>
-                     <select name="country" class="form-control selectric" required>
-                        <option value="">Select Country</option>
-                       <option value="Kenya" >Kenya</option>
-                        <option value="Uganda">Uganda</option>
-                         <option value="Rwanda">Rwanda</option>
-                        <option value="Tanzania">Tanzania</option>
-                      </select>
-                    </div>
-                  </div>
-                  <div class="row">
-                   
-                    <div class="form-group col-6">
-                      <label>Postal Code</label>
-                      <input type="text" name="address" class="form-control">
-                    </div>
-                    <div class="form-group col-6">
-                      <label>Shipping Number</label>
-                      <input type="text" name="shipping" class="form-control">
-                    </div>
-                  </div>
-
-                  <div class="row">
-                    <div class="form-group col-6">
-                      <label>Your Phone Number</label>
-                      <input  type="text" class="form-control" name="phone" autofocus>
-                    </div>
-                    <div class="form-group col-6">
-                      <label>Sponser Phone Number</label>
-                      <input  type="text"  name="sponsorNumber" id="sponsor" class="form-control" autofocus>
-                    </div>
-                  </div>
-
-                    <div class="row">
-                    <div class="form-group col-6">
-                      <label for="password" class="d-block">Password</label>
-                      <input  id="txtNewPassword" name="password" placeholder="Create Password" id="txtConfirmPassword" onChange="checkPasswordMatch();" type="password" class="form-control pwstrength" data-indicator="pwindicator" >
-                      <div id="pwindicator" class="pwindicator">
-                        <div class="bar"></div>
-                        <div class="label"></div>
-                      </div>
-                    </div>
-                    <div class="form-group col-6">
-                      <label for="password2" class="d-block">Password Confirmation</label>
-                      <input type="password" id="txtConfirmPassword" class="form-control" placeholder="Confirm Password" class="registrationFormAlert" onChange="checkPasswordMatch();">
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <div class="custom-control custom-checkbox">
-                     <div class="registrationFormAlert" id="divCheckPasswordMatch">
-                    </div>
-                    </div>
-                  </div>
-
-                  <div class="form-group">
-                    <button type="submit" class="btn btn-primary btn-lg btn-block">
-                      Register
-                    </button>
-                  </div>
-                </form>
+                    
+                        <a href="login.php" class="btn btn-primary btn-lg btn-block btn-icon-split col-8"><i class="fas fa-rocket"></i>
+                                  You are successfuly registered check you email to activate your account!  Click to return to a login page
+                                </a><br>
               </div>
             </div>
             <div class="simple-footer">

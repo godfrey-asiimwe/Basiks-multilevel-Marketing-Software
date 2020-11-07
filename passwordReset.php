@@ -49,7 +49,7 @@
 
               if(isset($_POST['submit'])){
 
-                     $password=md5($_POST['password']);
+              $password=md5($_POST['password']);
 
                     
 				     $sql="UPDATE accounts SET password='$password' WHERE email='$email'";

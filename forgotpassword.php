@@ -48,7 +48,7 @@ session_start();
 
                         $activate_link = 'http://demo.basiksservices.com/passwordReset.php?email=' . $_POST['email'];
 
-                        $message = '<p>Please click the following link to reset your account:<br><br> <a href="' . $activate_link . '">' . $activate_link . '</a></p>';
+                        $message = '<p>Please click the following link to reset your account:<br><br> <a href="' . $activate_link . '">Click Here to reset your password</a></p>';
 
                         mail($_POST['email'], $subject, $message);
 

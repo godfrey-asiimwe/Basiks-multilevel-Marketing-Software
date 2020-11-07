@@ -196,13 +196,15 @@ if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE email = ? and
 
 			//save_downline($phone,$gid);
 
-			$from    = 'agtumusiime@gmail.com';
-			$subject = 'Account Activation Required';
-			$headers = 'From: ' . $from . "\r\n" . 'Reply-To: ' . $from . "\r\n" . 'X-Mailer: PHP/' . phpversion() . "\r\n" . 'MIME-Version: 1.0' . "\r\n" . 'Content-Type: text/html; charset=UTF-8' . "\r\n";
+			$from    = 'noreply@basiksservices.com';
+            $subject = 'Account Activation Required';
+
 			$activate_link = 'http://demo.basiksservices.com/activate.php?email=' . $_POST['email'] . '&code=' . $uniqid;
-			$message = '<p>Please click the following link to activate your account: <a href="' . $activate_link . '">' . $activate_link . '</a></p>';
-			mail($_POST['email'], $subject, $message, $headers);
-			//header('Location:../login.html');
+
+			$message = 'Please click the following link to activate your account:   ' . $activate_link . '';
+
+			mail($_POST['email'], $subject, $message);
+			header('Location:../login.php');
 		} else {
 			// Something is wrong with the sql statement, check to make sure accounts table exists with all 3 fields.
 			echo 'Could not prepare statement!';

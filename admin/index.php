@@ -77,7 +77,7 @@
                     <h4>Total Purchases</h4>
                   </div>
                   <div class="card-body">
-                   <?php echo number_format(getAllPurchasesForMonth()); ?>
+                   <?php echo number_format(getTotalPurchases()); ?>
                   </div>
                 </div>
               </div>
@@ -92,10 +92,10 @@
                 </div>
                 <div class="card-wrap">
                   <div class="card-header">
-                    <h4>Daily Recruits</h4>
+                    <h4>Monthly Recruits</h4>
                   </div>
                   <div class="card-body">
-                    4,732
+                    <?php echo number_format(getAllUsersForAmonth());?>
                   </div>
                 </div>
               </div>
@@ -113,19 +113,20 @@
                 <div class="col-lg-12 col-md-12 col-12 col-sm-12">
                     <div class="card">
                       <div class="card-header">
-                        <h4>Active Users for <?php  echo date('M Y'); ?></h4>
+                        <h4>Users</h4>
                       </div>
                       <div class="card-body p-0">
                         <div class="table-responsive" style="padding: 20px !important;">
                           <table class="table table-bordered" id="dataTable" width="100%" style="padding:50px !important;" cellspacing="0">
                             <thead>
-                              <tr>
+                              <tr style="text-transform: uppercase;">
                                 <th>First Name</th>
                                 <th>Last Name</th>
                                 <th>Email</th>
                                 <th>Phone</th>
                                 <th>Country</th>
                                 <th>Address</th>
+                                <th>Status</th>
                                 <th>Action</th>
                               </tr>
                             </thead>

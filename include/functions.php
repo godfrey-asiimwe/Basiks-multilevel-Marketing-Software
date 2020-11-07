@@ -102,6 +102,16 @@ function getActiveUsers2(){
   return $d['totalusers'];
 }
 
+function getAllUsersForAmonth(){
+
+  $d2 = date('Y-m-d', strtotime('first day of this month'));
+
+  $users=mysqli_query(db_connection(),"SELECT COUNT(*) AS totalusers FROM accounts WHERE entry_date>='$d2'");
+  
+  $d=mysqli_fetch_assoc($users);
+  return $d['totalusers'];
+}
+
 //function to filter out specific user 
 function getUsersforFilter(){
    $sql4 ="SELECT * FROM accounts ";
@@ -120,7 +130,7 @@ function getUsersforFilter(){
 
 /*returning users for display*/
 function getAllUsersForDisplay(){
-   $sql4 ="SELECT * FROM accounts WHERE activation_code='active'";
+   $sql4 ="SELECT * FROM accounts";
            $result2 = mysqli_query(db_connection(), $sql4);
 
            if (mysqli_num_rows($result2) > 0) {
@@ -135,6 +145,7 @@ function getAllUsersForDisplay(){
                     <td><?php echo $row2["phone"];?></td>
                     <td><?php echo $row2["country"];?></td>
                     <td><?php echo $row2["address"];?></td>
+                    <td><?php echo $row2["activation_code"];?></td>
                     <td><a href="index.php?activateUser=<?php echo $row2["id"];?>" class="btn btn-primary modal-trigger"  ><small>Deactivate</small></a></td>
                   </tr>
                 <?php
@@ -214,8 +225,7 @@ function save_downline($phone,$gid){
 
     } else {
         echo "0 results";
-    }
-    
+    }  
 }
 
 function getAccountInfoBygid($itemID,$info){
@@ -247,42 +257,40 @@ function getAccountInfoById($itemID,$info){
     } else {
         echo "0";
     }
-
 }
 
 
 
 function getAccountInfoByPhone($itemID,$info){
 
-    $sql = "SELECT $info FROM accounts WHERE  phone='$itemID'";
-    $result = mysqli_query(db_connection(), $sql);
+  $sql = "SELECT $info FROM accounts WHERE  phone='$itemID'";
+  $result = mysqli_query(db_connection(), $sql);
 
-    if (mysqli_num_rows($result) > 0) {
-        while($row = mysqli_fetch_assoc($result)) {
-            $data=$row["$info"];
-           return $data;
-        }
-    } else {
-        echo "0 results";
-    }
-    
+  if (mysqli_num_rows($result) > 0) {
+      while($row = mysqli_fetch_assoc($result)) {
+          $data=$row["$info"];
+         return $data;
+      }
+  } else {
+      echo "0 results";
+  } 
+
 }
 
 
 function getAccountInfoBySponserid($itemID,$info){
 
-    $sql = "SELECT $info FROM accounts WHERE  gid='$itemID'";
-    $result = mysqli_query(db_connection(), $sql);
+  $sql = "SELECT $info FROM accounts WHERE  gid='$itemID'";
+  $result = mysqli_query(db_connection(), $sql);
 
-    if (mysqli_num_rows($result) > 0) {
-        while($row = mysqli_fetch_assoc($result)) {
-            $data=$row["$info"];
-           return $data;
-        }
-    } else {
-        echo "0 results";
-    }
-    
+  if (mysqli_num_rows($result) > 0) {
+      while($row = mysqli_fetch_assoc($result)) {
+          $data=$row["$info"];
+         return $data;
+      }
+  } else {
+      echo "0 results";
+  }   
 }
 
 
@@ -657,6 +665,16 @@ function getAllPurchases(){
    } 
 }
 
+function getTotalPurchases(){
+
+  $totalPurchases=mysqli_query(db_connection(),
+    "SELECT SUM(amount) AS total FROM purchase");
+
+  $d=mysqli_fetch_assoc($totalPurchases);
+
+  return $d['total'];
+
+}
 
 function getAllPurchasesForMonth(){
  $d2 = date('Y-m-d', strtotime('first day of this month'));
