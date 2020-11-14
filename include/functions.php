@@ -102,6 +102,7 @@ function getActiveUsers2(){
   return $d['totalusers'];
 }
 
+//returning users who signed up in a month
 function getAllUsersForAmonth(){
 
   $d2 = date('Y-m-d', strtotime('first day of this month'));
@@ -154,6 +155,31 @@ function getAllUsersForDisplay(){
            } 
 }
 
+//returning all active members
+function getAllActiveUsers(){
+   $sql4 ="SELECT * FROM accounts WHERE activation_code='activated'";
+           $result2 = mysqli_query(db_connection(), $sql4);
+
+           if (mysqli_num_rows($result2) > 0) {
+              while($row2 = mysqli_fetch_assoc($result2)) {
+
+                ?>
+
+                  <tr>
+                    <td class="text-left"><?php echo $row2["firstname"];?></td>
+                    <td><?php echo $row2["lastname"];?></td>
+                    <td><?php echo $row2["email"];?></td>
+                    <td><?php echo $row2["phone"];?></td>
+                    <td><?php echo $row2["country"];?></td>
+                    <td><?php echo $row2["address"];?></td>
+                  </tr>
+                <?php
+
+              }
+           } 
+}
+
+//returning phone numbers to select
 function phone_numbers(){
 
 	$sql = "SELECT phone,firstname,lastname FROM accounts";
@@ -170,6 +196,7 @@ function phone_numbers(){
 
 }
 
+//get emails for users for selection
 function getEmailUser(){
   $sql4 ="SELECT * FROM accounts ";
   $result2 = mysqli_query(db_connection(), $sql4);
@@ -188,6 +215,7 @@ function getEmailUser(){
   } 
 }
 
+//returning user Ids
 function getUserId(){
   $sql4 ="SELECT * FROM accounts ";
   $result2 = mysqli_query(db_connection(), $sql4);
@@ -206,7 +234,7 @@ function getUserId(){
   } 
 }
 
-
+//connecting a user to the their upline
 function save_downline($phone,$gid){
 
 	$sql ="SELECT * FROM accounts WHERE phone='$phone'";
@@ -224,10 +252,11 @@ function save_downline($phone,$gid){
         }
 
     } else {
-        echo "0 results";
+        echo "";
     }  
 }
 
+//returning account information by unic Id
 function getAccountInfoBygid($itemID,$info){
 
   $sql = "SELECT $info FROM accounts WHERE  gid='$itemID'";
@@ -239,11 +268,12 @@ function getAccountInfoBygid($itemID,$info){
            return $data;
         }
     } else {
-        echo "0 results";
+        echo "";
     }
 
 }
 
+//returning account information by Id
 function getAccountInfoById($itemID,$info){
 
   $sql = "SELECT $info FROM accounts WHERE  id='$itemID'";
@@ -255,12 +285,12 @@ function getAccountInfoById($itemID,$info){
            return $data;
         }
     } else {
-        echo "0";
+        echo "";
     }
 }
 
 
-
+//returning account infromation by phone
 function getAccountInfoByPhone($itemID,$info){
 
   $sql = "SELECT $info FROM accounts WHERE  phone='$itemID'";
@@ -272,14 +302,13 @@ function getAccountInfoByPhone($itemID,$info){
          return $data;
       }
   } else {
-      echo "0 results";
+      echo "";
   } 
 
 }
 
-
+//get account information by sponder Id
 function getAccountInfoBySponserid($itemID,$info){
-
   $sql = "SELECT $info FROM accounts WHERE  gid='$itemID'";
   $result = mysqli_query(db_connection(), $sql);
 
@@ -289,11 +318,11 @@ function getAccountInfoBySponserid($itemID,$info){
          return $data;
       }
   } else {
-      echo "0 results";
+      echo "";
   }   
 }
 
-
+//get number of Rows
 function getNoofRows($upline){
 
     $canceledsum=mysqli_query(db_connection(),"SELECT COUNT(*) AS totalcanceled FROM relationship WHERE upline='$upline'");
@@ -302,6 +331,7 @@ function getNoofRows($upline){
 
 }
 
+//get downline level 2
 function getDownlinelevel2($id){
     $sql3 ="SELECT * FROM relationship WHERE upline='$id'";
      $result = mysqli_query(db_connection(), $sql3);
@@ -368,6 +398,7 @@ function getDownlinelevel2($id){
      }
 }
 
+//
 function getTheLastgestNoofDownline($id2){
     $sql4 ="SELECT * FROM relationship WHERE upline='$id2'";
      $result = mysqli_query(db_connection(), $sql4);
@@ -403,6 +434,7 @@ function getTheLastgestNoofDownline($id2){
     }
 }
 
+//returning the downline
 function getDownline($id){
 
      $sql3 ="SELECT * FROM relationship WHERE upline='$id'";
@@ -434,7 +466,8 @@ function getDownline($id){
      }
 }
 
-function getUpline($downline){
+//pay an upline level 1
+function PaytheUpline1($downline){
 
      $sql3 ="SELECT * FROM relationship WHERE downline='$downline'";
      $result = mysqli_query(db_connection(), $sql3);
@@ -467,6 +500,7 @@ function getUpline($downline){
    }
 }
 
+//pay upline level 2
 function getUplineleve2($downline){
 
      $sql3 ="SELECT * FROM relationship WHERE downline='$downline'";
@@ -498,7 +532,7 @@ function getUplineleve2($downline){
    }
 }
 
-
+//returning the admin
 function getadmin(){
 
   $sql = "SELECT id,firstname,lastname FROM accounts WHERE email='admin@gmail.com'";
@@ -522,33 +556,32 @@ function getadmin(){
 function getAllProductsForDisplay(){
    $sql4 ="SELECT * FROM products ";
            $result2 = mysqli_query(db_connection(), $sql4);
+   if (mysqli_num_rows($result2) > 0) {
+      while($row2 = mysqli_fetch_assoc($result2)) {
+        $id=$row2["id"];
 
-           if (mysqli_num_rows($result2) > 0) {
-              while($row2 = mysqli_fetch_assoc($result2)) {
-                $id=$row2["id"];
+        ?>
 
-                ?>
+          <tr>
+            <td class="text-left"><img src="upload/<?php echo $row2["image"];?>" style="width:100px;"></td>
+            <td><?php echo $row2["name"];?></td>
+            <td><?php echo $row2["info"];?></td>
+            <td><?php echo $row2["price"];?></td>
+            <td><?php echo $row2["category"];?></td>
+            <td>
+               <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit" href="product.php?editLevel=<?php echo $row2["id"];?>"><i class="fas fa-pencil-alt"></i></a>
+            </td>
 
-                  <tr>
-                    <td class="text-left"><img src="upload/<?php echo $row2["image"];?>" style="width:100px;"></td>
-                    <td><?php echo $row2["name"];?></td>
-                    <td><?php echo $row2["info"];?></td>
-                    <td><?php echo $row2["price"];?></td>
-                    <td><?php echo $row2["category"];?></td>
-                    <td>
-                       <a class="btn btn-primary btn-action mr-1" data-toggle="tooltip" title="Edit" href="product.php?editLevel=<?php echo $row2["id"];?>"><i class="fas fa-pencil-alt"></i></a>
-                    </td>
+             <td>
 
-                     <td>
+              <a href="product.php?deleteproduct=<?php echo $row2["id"];?>" class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete"  data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
 
-                      <a href="product.php?deleteproduct=<?php echo $row2["id"];?>" class="btn btn-danger btn-action" data-toggle="tooltip" title="Delete"  data-confirm="Are You Sure?|This action can not be undone. Do you want to continue?" data-confirm-yes="alert('Deleted')"><i class="fas fa-trash"></i></a>
+             </td>
+          </tr>
+        <?php
 
-                     </td>
-                  </tr>
-                <?php
-
-              }
-           } 
+      }
+   } 
 }
 
 /*returning users for display*/
@@ -579,6 +612,7 @@ function getAllProductsForDisplayUser(){
            } 
 }
 
+//return product by Id
 function getProductById($itemID,$info){
 
     $sql = "SELECT $info FROM products WHERE  id='$itemID'";
@@ -590,12 +624,12 @@ function getProductById($itemID,$info){
            return $data;
         }
     } else {
-        echo "0 results";
+        echo "";
     }
     
 }
 
-
+//return products
 function getProducts(){
 
    $sql4 ="SELECT * FROM products";
@@ -632,7 +666,7 @@ function getProducts(){
 /*......................end of products functions*/
 
 /*Purchases functions*/
-
+//return purchases
 function getAllPurchases(){
    $sql4 ="SELECT * FROM purchase ";
    $result2 = mysqli_query(db_connection(), $sql4);
@@ -665,6 +699,44 @@ function getAllPurchases(){
    } 
 }
 
+//return all daily purcahses
+function getAllDailyPurchases(){
+
+  $time=time();
+  $date=date("Y-m-d",$time); 
+
+   $sql4 ="SELECT * FROM purchase WHERE entry_date='$date' ";
+   $result2 = mysqli_query(db_connection(), $sql4);
+
+   if (mysqli_num_rows($result2) > 0) {
+      while($row2 = mysqli_fetch_assoc($result2)) {
+
+        $id=$row2["tid"];
+        $billno=$row2["bill_no"];
+        $productName=$row2["name"];
+        $userno=$row2["user_no"];
+        $amount=$row2["amount"];
+        $date=$row2["entry_date"];
+
+        $firstname=getAccountInfoBygid($userno,'firstname');
+        $lastname=getAccountInfoBygid($userno,'lastname');
+        $name=$firstname. "  ".$lastname;
+
+        ?>
+          <tr>
+            <td class="text-left"><?php echo $billno;?></td>
+            <td><?php echo $name;?></td>
+            <td><?php echo $productName;?></td>
+            <td><?php echo number_format($amount);?></td>
+            <td><?php echo $date;?></td>
+          </tr>
+        <?php
+
+      }
+   } 
+}
+
+//get total purchases
 function getTotalPurchases(){
 
   $totalPurchases=mysqli_query(db_connection(),
@@ -676,6 +748,7 @@ function getTotalPurchases(){
 
 }
 
+//return total purcahses for a month
 function getAllPurchasesForMonth(){
  $d2 = date('Y-m-d', strtotime('first day of this month'));
 
@@ -687,6 +760,7 @@ function getAllPurchasesForMonth(){
   return $d['total'];
 }
 
+//return all purchases for a month
 function getPurchasesForamonth(){
   $d2 = date('Y-m-d', strtotime('first day of this month'));
 
@@ -702,9 +776,9 @@ function getPurchasesForamonth(){
 
       }
    } 
-
 }
 
+//get purchases for a user in a month
 function getPurchasesForaUserinamonth($userno){
    $d2 = date('Y-m-d', strtotime('first day of this month'));
 
@@ -746,6 +820,7 @@ function getAllUsersForDisplay2($user_no){
      } 
 }
 
+//get all purchases for a user in a month
 function getAllPurchasesByUser($user_no){
    $sql4 ="SELECT * FROM purchase WHERE user_no='$user_no'";
    $result2 = mysqli_query(db_connection(), $sql4);
@@ -781,7 +856,7 @@ function getAllPurchasesByUser($user_no){
    } 
 }
 
-
+//get all messages for a user in a month
 function getMessagesForAuser($id){
    $sql4 ="SELECT * FROM message WHERE receiver='$id'";
    $result2 = mysqli_query(db_connection(), $sql4);
@@ -814,6 +889,7 @@ function getMessagesForAuser($id){
    } 
 }
 
+//get all messages sent by the Admin
 function getMessagesSentByAdmin($id){
    $sql4 ="SELECT * FROM message WHERE sender='$id'";
    $result2 = mysqli_query(db_connection(), $sql4);
@@ -846,6 +922,7 @@ function getMessagesSentByAdmin($id){
    } 
 }
 
+//get all messages for the admin
 function getMessagesForAdmin($id){
    $sql4 ="SELECT * FROM message WHERE receiver='$id'";
    $result2 = mysqli_query(db_connection(), $sql4);
@@ -878,6 +955,7 @@ function getMessagesForAdmin($id){
    } 
 }
 
+//get new messages for a user
 function getNewMessagesForAuser($id){
    $sql4 ="SELECT * FROM message WHERE receiver='$id'";
    $result2 = mysqli_query(db_connection(), $sql4);
@@ -913,6 +991,7 @@ function getNewMessagesForAuser($id){
    } 
 }
 
+//get new messages for admin
 function getNewMessagesForAdmin($id){
    $sql4 ="SELECT * FROM message WHERE receiver='$id'";
    $result2 = mysqli_query(db_connection(), $sql4);
@@ -948,6 +1027,7 @@ function getNewMessagesForAdmin($id){
    } 
 }
 
+//get Downline to display in a tree
 function getDownlineForTree($id){
 
    $sql3 ="SELECT * FROM relationship WHERE upline='$id'";
@@ -979,7 +1059,7 @@ function getDownlineForTree($id){
    } 
 }
 
-
+// get level 2 for the downline to display in a tree
 function getDownlineForTreelevel2($id){
     $sql3 ="SELECT * FROM relationship WHERE upline='$id'";
      $result = mysqli_query(db_connection(), $sql3);
@@ -1011,7 +1091,7 @@ function getDownlineForTreelevel2($id){
      }
 }
 
-
+//get all compensation amount
 function getAllCompensationAmount(){
    $sql4 ="SELECT * FROM comp_amount ";
    $result2 = mysqli_query(db_connection(), $sql4);
@@ -1039,6 +1119,7 @@ function getAllCompensationAmount(){
    } 
 }
 
+//returning information for  the compansation amounts
 function getComp_amountInfo($itemID,$info){
 
   $sql = "SELECT $info FROM comp_amount WHERE  tid='$itemID'";
@@ -1055,6 +1136,7 @@ function getComp_amountInfo($itemID,$info){
 
 }
 
+//get level amounts
 function getlevelAmount($level){
 
   $sql = "SELECT * FROM comp_amount WHERE  level='$level'";
@@ -1071,6 +1153,7 @@ function getlevelAmount($level){
 
 }
 
+//returning the amounts earned by the user
 function getincomeByUser($id){
    $sql4 ="SELECT * FROM payments WHERE reciever='$id'";
    $result2 = mysqli_query(db_connection(), $sql4);
@@ -1101,6 +1184,7 @@ function getincomeByUser($id){
    } 
 }
 
+//get all the earnings in a month
 function getAllEarningsForMonth(){
  $d2 = date('Y-m-d', strtotime('first day of this month'));
 
@@ -1152,7 +1236,7 @@ function getAllStockists(){
            } 
 }
 
-
+//get stockist information
 function getStockistInfo($itemID,$info){
 
   $sql = "SELECT $info FROM Stockist WHERE  id='$itemID'";
@@ -1197,7 +1281,7 @@ function getAllProductsForStockist(){
    } 
 }
 
-
+//return purchases for a given stockist
 function getAllPurchasesForStockist(){
    $sql4 ="SELECT * FROM purchase WHERE status='new'";
    $result2 = mysqli_query(db_connection(), $sql4);
@@ -1247,13 +1331,6 @@ function getDownlineJson($id){
         echo $downline.'<br>';
       }
    }  
-}
-
-
-function link2($player_password,$nick,$msisdn,$email,$dateofbirth,$skillpod_player_id,$gender,$gid){
-
-    echo 'https://www.multiplayergameserver.com/xmlapi7/xmlapi.php?site_id=889&password=R6Kz2x7yT1&nocompress=true&action=register_player&nick='.$nick.'&msisdn='.$msisdn.'&player_password='.$player_password.'&email='.$email.'&gender='.$gender.'&date_of_birth='.$dateofbirth.'&skillpod_player_id='.$gid.'';
-
 }
 
 ?>

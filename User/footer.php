@@ -137,6 +137,38 @@
       } 
     });
   });
+
+
+  $(document).ready(function(){
+
+    $('#register').on('click', function(){
+    if($('#county').val() == ""){
+        alert('Please enter county');
+      }else{
+        
+        $county = $('#county').val();
+        $location = $('#location').val();
+        $id= $('#id2').val();
+        
+        $.ajax({
+
+          type: "POST",
+          url: "reg_stockist.php",
+          data: {
+            county:$county,
+            location:$location,
+            id:$id,
+          },
+          success: function(){
+
+            $("#register_stockist")[0].reset();
+
+            alert(" Successfully registered");
+          }
+        });
+      } 
+    });
+  });
  </script>
 
 </body>

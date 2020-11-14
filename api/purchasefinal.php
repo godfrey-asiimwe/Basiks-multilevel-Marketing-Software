@@ -24,8 +24,8 @@ mysqli_query($con,$sql);
 
 echo 'successfully paid';
 
-//getUpline($user_no);
-//header('Location:../login.php');
+PaytheUpline1($user_no);
+header('Location:../login.php');
 $con->close();
 
 ?>          

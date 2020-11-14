@@ -7,6 +7,7 @@
                 <ul class="dropdown-menu">
                   <li class="active"><a class="nav-link" href="index.php"><i class="fas fa-bars"></i><span>Report Dashboard</span></a></li>
                   <li class=""><a class="nav-link" href="compensation.php"><i class="fas fa-dollar-sign"></i><span>Default Amounts</span></a></li>
+                  <li><a class="nav-link" href="activeusers.php"><i class="fas fa-dollar-sign"></i><span>Active Members</span></a></li>
                 </ul>
               </li>
               <li class="menu-header">Stockist</li>
@@ -17,6 +18,7 @@
              
               <li><a class="nav-link" href="product.php"><i class="fas fa-shopping-bag"></i> <span>Products</span></a></li>
               <li><a class="nav-link" href="purchases.php"><i class="fas fa-archive"></i> <span>Purchases</span></a></li>
+               <li class=""><a class="nav-link" href="dailypurchases.php"><i class="fas fa-archive"></i> <span> Daily Purchases</span></a></li>
 
               
               <li class="menu-header ">Messages</li>

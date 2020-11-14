@@ -109,11 +109,11 @@
                       $nick="Nick already used";
                       $email="Email already used";
 
-                      if($xml->error_message==$email){
+                      if($xml->error_message==$nick){
 ?>
 
                         <form method="POST" action="playgame.php">
-                            <div class="form-group col-6">
+                          <div class="form-group col-6">
                               <label>Select a Game</label>
                                <select name="game" class="form-control selectric" required>
                                   <option value="107487">Run Pixie Run</option>
@@ -125,9 +125,7 @@
                               Play
                             </button>
                           </div>
-
                         </form>
-
 
                       <?php
 

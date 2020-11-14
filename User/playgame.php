@@ -73,7 +73,7 @@
                     echo '<iframe src="https://www.multiplayergameserver.com/xmlapi7/rdf.playgame.php?skillpod_siteid=889
                     &skillpod_userid='.$skillpod_player_id.'
                     &gameid='.$gameid.'
-                    &fullscreen=true" style="width: 100%;height: 400px;" ></iframe>';
+                    &fullscreen=true" style="width:auto;height: auto;" ></iframe>';
 
 
                     ?>

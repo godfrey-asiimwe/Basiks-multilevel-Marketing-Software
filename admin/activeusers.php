@@ -2,19 +2,23 @@
 
           <ul class="sidebar-menu">
               <li class="menu-header">Dashboard</li>
-              <li class="nav-item dropdown">
+              <li class="nav-item dropdown active">
                 <a href="#" class="nav-link has-dropdown"><i class="fas fa-fire"></i><span>Dashboard</span></a>
                 <ul class="dropdown-menu">
-                  <li class=""><a class="nav-link" href="index.php"><i class="fas fa-bars"></i><span>Report Dashboard</span></a></li>
+                  <li ><a class="nav-link" href="index.php"><i class="fas fa-bars"></i><span>Report Dashboard</span></a></li>
                   <li class=""><a class="nav-link" href="compensation.php"><i class="fas fa-dollar-sign"></i><span>Default Amounts</span></a></li>
-                  <li><a class="nav-link" href="activeusers.php"><i class="fas fa-dollar-sign"></i><span>Active Members</span></a></li>
+                  <li class="active"><a class="nav-link" href="activeusers.php"><i class="fas fa-dollar-sign"></i><span>Active Members</span></a></li>
                 </ul>
               </li>
+               <li class="menu-header">Stockist</li>
+             
+              <li><a class="nav-link" href="stockist.php"><i class="fas fa-shopping-bag"></i> <span>Stockist</span></a></li>
+
               <li class="menu-header">Products</li>
              
               <li><a class="nav-link" href="product.php"><i class="fas fa-shopping-bag"></i> <span>Products</span></a></li>
-              <li class="active"><a class="nav-link" href="purchases.php"><i class="fas fa-archive"></i> <span>Purchases</span></a></li>
-              <li class=""><a class="nav-link" href="dailypurchases.php"><i class="fas fa-archive"></i> <span> Daily Purchases</span></a></li>
+              <li><a class="nav-link" href="purchases.php"><i class="fas fa-archive"></i> <span>Purchases</span></a></li>
+               <li class=""><a class="nav-link" href="dailypurchases.php"><i class="fas fa-archive"></i> <span> Daily Purchases</span></a></li>
 
               
               <li class="menu-header ">Messages</li>
@@ -26,53 +30,41 @@
         </aside>
       </div>
 
-        <div class="main-content">
-            <section class="section">
-
-              <div class="section-body" style="margin-top: 100px;">
-                <h2 class="section-title">Purchases</h2>
-                <p class="section-lead">We provide advanced input fields, such as date picker, color picker, and so on.</p>
-              </div>
-
-              <div class="row">
+      <!-- Main Content -->
+      <div class="main-content">
+        <section class="section">
+          <div class="row">
+                <!-- DataTales Example -->
                 <div class="col-lg-12 col-md-12 col-12 col-sm-12">
-                  <div class="card">
-                    <div class="card-header">
-                      <h4>List of Purchases</h4>
-                    </div>
-                    <div class="card-body p-0">
-                      <div class="table-responsive" style="padding: 20px !important;">
-                        <table  class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
-                          <thead>
-                            <tr>
-                              <th>Bill No</th>
-                              <th>Name</th>
-                              <th>Product</th>
-                              <th>Amount</th>
-                              <th>Date</th>
-                            </tr>
-                          </thead>
-                          <tfoot>
-                            <tr>
-                              <th>Bill No</th>
-                              <th>Name</th>
-                              <th>Product</th>
-                              <th>Amount</th>
-                              <th>Date</th>
-                            </tr>
-                          </tfoot>
-                          <tbody>
-                           <?php getAllPurchases()?>
-                          </tbody>
-                        </table>
+                    <div class="card">
+                      <div class="card-header">
+                        <h4>Users</h4>
+                      </div>
+                      <div class="card-body p-0">
+                        <div class="table-responsive" style="padding: 20px !important;">
+                          <table class="table table-bordered" id="dataTable" width="100%" style="padding:50px !important;" cellspacing="0">
+                            <thead>
+                              <tr style="text-transform: uppercase;">
+                                <th>First Name</th>
+                                <th>Last Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Country</th>
+                                <th>Address</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                             <?php getAllActiveUsers(); ?>
+                            </tbody>
+                          </table>
+                        </div>
                       </div>
                     </div>
-                  </div>
                 </div>
-             </div>
-          </section>
-        </div>
-      <!-- End of Main Content -->
+          </div>
+        </section>
+      </div>
+
 
       <footer class="main-footer">
         <div class="footer-left">

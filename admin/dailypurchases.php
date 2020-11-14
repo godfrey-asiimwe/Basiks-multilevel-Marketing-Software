@@ -7,16 +7,16 @@
                 <ul class="dropdown-menu">
                   <li class=""><a class="nav-link" href="index.php"><i class="fas fa-bars"></i><span>Report Dashboard</span></a></li>
                   <li class=""><a class="nav-link" href="compensation.php"><i class="fas fa-dollar-sign"></i><span>Default Amounts</span></a></li>
-                  <li><a class="nav-link" href="activeusers.php"><i class="fas fa-dollar-sign"></i><span>Active Members</span></a></li>
+                    <li><a class="nav-link" href="activeusers.php"><i class="fas fa-dollar-sign"></i><span>Active Members</span></a></li>
                 </ul>
               </li>
-              <li class="menu-header">Products</li>
-             
-              <li><a class="nav-link" href="product.php"><i class="fas fa-shopping-bag"></i> <span>Products</span></a></li>
-              <li class="active"><a class="nav-link" href="purchases.php"><i class="fas fa-archive"></i> <span>Purchases</span></a></li>
-              <li class=""><a class="nav-link" href="dailypurchases.php"><i class="fas fa-archive"></i> <span> Daily Purchases</span></a></li>
 
-              
+              <li class="menu-header">Products</li>
+              <li><a class="nav-link" href="product.php"><i class="fas fa-shopping-bag"></i> <span>Products</span></a></li>
+
+              <li class=""><a class="nav-link" href="purchases.php"><i class="fas fa-archive"></i> <span>Purchases</span></a></li>
+              <li class="active"><a class="nav-link" href="dailypurchases.php"><i class="fas fa-archive"></i> <span> Daily Purchases</span></a></li>
+
               <li class="menu-header ">Messages</li>
                <li><a class="nav-link" href="sent.php"><i class="fas fa-envelope"></i> <span>Sent Messages</span></a></li>
               <li ><a class="nav-link" href="received.php"><i class="fas fa-envelope"></i> <span>Received Messages</span></a></li>
@@ -38,7 +38,7 @@
                 <div class="col-lg-12 col-md-12 col-12 col-sm-12">
                   <div class="card">
                     <div class="card-header">
-                      <h4>List of Purchases</h4>
+                      <h4>List of Daily Purchases</h4>
                     </div>
                     <div class="card-body p-0">
                       <div class="table-responsive" style="padding: 20px !important;">
@@ -62,7 +62,7 @@
                             </tr>
                           </tfoot>
                           <tbody>
-                           <?php getAllPurchases()?>
+                           <?php getAllDailyPurchases()?>
                           </tbody>
                         </table>
                       </div>

@@ -15,7 +15,7 @@ $sql ="INSERT INTO purchase (bill_no,name,product_id,amount,user_no,entry_date) 
     // execute query
     mysqli_query($con, $sql);
 
-    getUpline($user_no);
+    PaytheUpline1($user_no);
  
     header('Location:../product.php');
 

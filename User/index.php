@@ -94,8 +94,8 @@
               <div class="card card-statistic-1">
                 
                 <div class="card-wrap" style="padding:32px;">
-                   <a  href="#" data-toggle="modal" data-target="#inviteUser" class="btn btn-primary">
-                <i class="fas fa-sign-out-alt"></i> Invite New Member
+                   <a  href="#" data-toggle="modal" data-target="#registerstockist" class="btn btn-primary">
+                <i class="fas fa-sign-out-alt"></i> Register as Stockist
               </a>
                 </div>
               </div>
@@ -189,11 +189,11 @@
 
                                   }
                                } else {
-                                  echo "0 results";
+                                  echo "";
                                }
                             }
                          } else {
-                            echo "0 results";
+                            echo "";
                          }
 
                       ?>
@@ -206,6 +206,7 @@
           </div>
         </section>
       </div>
+
   <!-- Logout Modal-->
   <div class="modal fade" id="inviteUser" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -217,17 +218,15 @@
           </button>
         </div>
         <div class="modal-body">
-
-            <form method="post" id="invite_form">  
-              <div class="form-group row">
-                  <div class="col-sm-12 mb-12 mb-sm-0">
-                    <input type="email" id="email" name="email" class="form-control form-control-user" placeholder="Enter Email" required>
-                  </div>
-              </div>
-                 <input type="hidden" name="id" id="id" value=" <?php echo $id; ?>" /> 
-                <input type="submit" name="invite" id="invite" value="Invite" class="btn btn-success" />  
-           </form>
-
+          <form method="post" id="invite_form">  
+            <div class="form-group row">
+                <div class="col-sm-12 mb-12 mb-sm-0">
+                  <input type="email" id="email" name="email" class="form-control form-control-user" placeholder="Enter Email" required>
+                </div>
+            </div>
+               <input type="hidden" name="id" id="id" value=" <?php echo $id; ?>" /> 
+              <input type="submit" name="invite" id="invite" value="Invite" class="btn btn-success" />  
+          </form>
         </div>
         <div class="modal-footer">
           <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
@@ -235,4 +234,32 @@
       </div>
     </div>
   </div>
-     <?php include 'footer.php';?>
+
+  <!-- Logout Modal-->
+  <div class="modal fade" id="registerstockist" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Are you sure you are registering as Stockist?</h5>
+          <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">×</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          <form method="post" id="register_stockist">  
+            <div class="form-group row">
+              <div class="col-sm-12 mb-12 mb-sm-0">
+                <input type="text" id="county" name="county" class="form-control form-control-user" placeholder="Enter County" required><br>
+                <input type="text" id="location" name="location" class="form-control form-control-user" placeholder="Enter Location" required>
+              </div>
+            </div>
+            <input type="hidden" name="id2" id="id2" value="<?php echo $gid; ?>" /> 
+            <input type="submit" name="register" id="register" value="Register" class="btn btn-success"/>  
+          </form>
+        </div>
+        <div class="modal-footer">
+        </div>
+      </div>
+    </div>
+  </div>
+<?php include 'footer.php';?>
