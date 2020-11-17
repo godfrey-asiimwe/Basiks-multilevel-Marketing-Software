@@ -33,7 +33,23 @@
     $xml_str = $response;
     $xml=simplexml_load_string($xml_str);
     
-    echo $xml->games->game_0->id;
+   $gameName;
+
+     $arr =range(0,10);
+
+  foreach($arr as $key=>$value)
+  {
+      unset($arr[$key + 1]);
+      
+      $gameName ='game_'.$value;
+
+     echo $xml->games-> $gameName->id;
+     echo "<br>";
+     echo $xml->games-> $gameName->name;
+     echo "<br>";
+    
+  }
+ 
  
 
 ?>

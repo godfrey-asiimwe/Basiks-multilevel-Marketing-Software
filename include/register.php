@@ -68,19 +68,33 @@ if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE email = ? and
 				$phone2=phoneNumberRw($phone);
 			}
 
-			
-
-			/*	$stmt->bind_param('sssssssssssss',$_POST['firstname'],$_POST['lastname'],$_POST['address'],$_POST['shipping'],$_POST['country'],$_POST['sponsorNumber'],$_POST['dateofbirth'],$_POST['gender'],$_POST['phone'], $password, $_POST['email'], $uniqid,$gid);*/
-
-		
-			//$stmt->execute();
-
 			$phone=$_POST['sponsorNumber'];
 
-			$id2=getAccountInfoByPhone($phone,'id');
-			$sponser=getAccountInfoByPhone($phone,'gid');
-			
-			$no=getNoofRows($id2);
+			if(empty($_POST['sponsorNumber'])){
+
+				$id=getAccountInfoByUserName('Admin','id');
+
+				$sponser=getAccountInfoById($id,'gid');
+				
+
+				$query="INSERT INTO accounts (firstname,lastname,address,shipping,country,sponsorNumber,dateofbirth,gender,phone,password,email, activation_code,gid,entry_date,sponsorId) VALUES ('$firstname','$lastname','$address','$shipping','$country','$sponder','$dateofbirth','$gender','$phone2','$password','$email','$uniqid','$gid','$date','$sponser')";
+
+		    	mysqli_query($con,$query);
+
+     	        $sql2 = "INSERT INTO relationship (upline, downline, linelevel) VALUES ('$id2','$gid','1')";
+     	        
+		        if(mysqli_query($con, $sql2)){
+				    echo "Records added successfully.";
+				} else{
+				    echo "ERROR: Could not able to execute sql." . mysqli_error($con);
+				}
+
+			}else{
+
+				$id2=getAccountInfoByPhone($phone,'id');
+				$sponser=getAccountInfoByPhone($phone,'gid');
+				
+				$no=getNoofRows($id2);
 
 			    if ($no<7) {
 
@@ -192,7 +206,8 @@ if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE email = ? and
 				    } else {
 				        echo " ..0 results 1";
 				    }
-			  }
+			    }
+			}
 
 			//save_downline($phone,$gid);
 

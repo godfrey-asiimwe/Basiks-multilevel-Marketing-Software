@@ -256,6 +256,23 @@ function save_downline($phone,$gid){
     }  
 }
 
+//returning account information by username
+function getAccountInfoByUserName($itemID,$info){
+
+  $sql = "SELECT $info FROM accounts WHERE  firstname='$itemID'";
+    $result = mysqli_query(db_connection(), $sql);
+
+    if (mysqli_num_rows($result) > 0) {
+        while($row = mysqli_fetch_assoc($result)) {
+            $data=$row["$info"];
+           return $data;
+        }
+    } else {
+        echo "";
+    }
+
+}
+
 //returning account information by unic Id
 function getAccountInfoBygid($itemID,$info){
 

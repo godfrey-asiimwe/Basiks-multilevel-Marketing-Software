@@ -53,7 +53,7 @@
                          ?>
                       <h4>Products</h4>
                       <div class="card-header-action">
-                        <a href="#" onclick="myFunction()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Add A Stockist</a>
+                <!--         <a href="#" onclick="myFunction()" class="d-none d-sm-inline-block btn btn-sm btn-primary shadow-sm"><i class="fas fa-download fa-sm text-white-50"></i> Add A Stockist</a> -->
                       </div>
                     </div>
                     <div class="card-body p-0">

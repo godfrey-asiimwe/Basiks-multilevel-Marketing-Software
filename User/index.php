@@ -17,7 +17,7 @@
               </ul>
             </li>
             <li>
-              <a class="nav-link" href="network.php"><i class="far fa-square"></i> 
+              <a class="nav-link" href="network.php"><i class="fas fa-network-wired"></i>
               <span>Net Work</span></a>
             </li>
             <div class="mt-4 mb-4 p-3 hide-sidebar-mini">

@@ -45,11 +45,11 @@
                   <li><a class="nav-link" href="account.php">accounts</a></li>
                 </ul>
               </li>
-              <li><a class="nav-link" href="network.php"><i class="far fa-square"></i> <span>Net Work</span></a></li>
+              <li><a class="nav-link" href="network.php"><i class="fas fa-network-wired"></i><span>Net Work</span></a></li>
 
-            <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-              <a href="http://demo.basiksservices.com/" class="btn btn-primary btn-lg btn-block btn-icon-split">
-                <i class="fas fa-rocket"></i> See the Website
+           <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+              <a href="game.php" class="btn btn-primary btn-lg btn-block btn-icon-split">
+                <i class="fas fa-rocket"></i>Play Game
               </a>
             </div>
         </aside>
@@ -104,58 +104,50 @@
                     $xml_str = $response;
                     $xml=simplexml_load_string($xml_str);
                     //var_dump($xml);
+                    
+                  
 
 
                       $nick="Nick already used";
                       $email="Email already used";
 
                       if($xml->error_message==$nick){
-?>
-
-                        <form method="POST" action="playgame.php">
-                          <div class="form-group col-6">
-                              <label>Select a Game</label>
-                               <select name="game" class="form-control selectric" required>
-                                  <option value="107487">Run Pixie Run</option>
-                                </select>
+                          
+                        ?>
+                          
+                          <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+                              <a href="gameselect.php" class="btn btn-primary btn-lg btn-block btn-icon-split">
+                                <i class="fas fa-rocket"></i>You are registered, proceed to select a game
+                              </a>
                             </div>
-
-                            <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">
-                              Play
-                            </button>
-                          </div>
-                        </form>
-
-                      <?php
+                            
+                        <?php
+                          
 
                       }elseif($xml->error_message==$email){
-
+                            
                         ?>
-
-                        <a href="game.php" class="btn btn-primary btn-lg btn-block btn-icon-split col-4"><i class="fas fa-rocket"></i>
-                                  You are successfuly registered go ahead and play games
-                                </a><br>
-
-                        <form method="POST" action="playgame.php">
-                            <div class="form-group col-6">
-                              <label>Select a Game</label>
-                               <select name="game" class="form-control selectric" required>
-                                  <option value="107487">Run Pixie Run</option>
-                                </select>
+                          
+                          <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+                              <a href="gameselect.php" class="btn btn-primary btn-lg btn-block btn-icon-split">
+                                <i class="fas fa-rocket"></i>You are registered, proceed to select a game
+                              </a>
                             </div>
+                            
+                        <?php
+                          
 
-                            <div class="form-group">
-                            <button type="submit" class="btn btn-primary btn-lg btn-block">
-                              Play
-                            </button>
-                          </div>
-
-                        </form>
-
-
-                      <?php
-
+                      }else{
+                          
+                         ?>
+                          
+                          <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+                              <a  href="" class="btn btn-primary btn-lg btn-block btn-icon-split">
+                                <i class="fas fa-rocket"></i>You are registered, refresh the page.
+                              </a>
+                            </div>
+                            
+                        <?php
                       }
 
                     ?>

@@ -48,11 +48,11 @@
                   <li><a class="nav-link" href="account.php">accounts</a></li>
                 </ul>
               </li>
-              <li><a class="nav-link" href="network.php"><i class="far fa-square"></i> <span>Net Work</span></a></li>
+              <li><a class="nav-link" href="network.php"><i class="fas fa-network-wired"></i><span>Net Work</span></a></li>
 
             <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
-              <a href="http://demo.basiksservices.com/" class="btn btn-primary btn-lg btn-block btn-icon-split">
-                <i class="fas fa-rocket"></i> See the Website
+              <a href="game.php" class="btn btn-primary btn-lg btn-block btn-icon-split">
+                <i class="fas fa-rocket"></i>Play Game
               </a>
             </div>
         </aside>
@@ -62,7 +62,11 @@
       <div class="main-content">
         <section class="section">
           <div class="section-header">
-            <h1>Games</h1>
+            <div class="mt-4 mb-4 p-3 hide-sidebar-mini">
+              <a href="gameselect.php" class="btn btn-primary btn-lg btn-block btn-icon-split">
+                <i class="fas fa-rocket"></i>Back
+              </a>
+            </div>
           </div>
           <div class="row">
             <div class="col-12 col-md-12 col-lg-12">
@@ -73,11 +77,9 @@
                     echo '<iframe src="https://www.multiplayergameserver.com/xmlapi7/rdf.playgame.php?skillpod_siteid=889
                     &skillpod_userid='.$skillpod_player_id.'
                     &gameid='.$gameid.'
-                    &fullscreen=true" style="width:auto;height: auto;" ></iframe>';
-
+                    &fullscreen=true&seemless=true" style="width: 100%;height: 400px;" ></iframe>';
 
                     ?>
-
                     <script type="text/javascript">
                    
                     </script>
