@@ -68,145 +68,15 @@ if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE email = ? and
 				$phone2=phoneNumberRw($phone);
 			}
 
-			$phone=$_POST['sponsorNumber'];
+			//$phone=$_POST['sponsorNumber'];
 
 			if(empty($_POST['sponsorNumber'])){
 
-				$id=getAccountInfoByUserName('Admin','id');
-
-				$sponser=getAccountInfoById($id,'gid');
-				
-
-				$query="INSERT INTO accounts (firstname,lastname,address,shipping,country,sponsorNumber,dateofbirth,gender,phone,password,email, activation_code,gid,entry_date,sponsorId) VALUES ('$firstname','$lastname','$address','$shipping','$country','$sponder','$dateofbirth','$gender','$phone2','$password','$email','$uniqid','$gid','$date','$sponser')";
-
-		    	mysqli_query($con,$query);
-
-     	        $sql2 = "INSERT INTO relationship (upline, downline, linelevel) VALUES ('$id2','$gid','1')";
-     	        
-		        if(mysqli_query($con, $sql2)){
-				    echo "Records added successfully.";
-				} else{
-				    echo "ERROR: Could not able to execute sql." . mysqli_error($con);
-				}
+				makeAdminSponser($firstname,$lastname,$address,$shipping,$country,$sponder,$dateofbirth,$gender,$phone2,$password,$email,$uniqid,$gid,$date,$sponser);
 
 			}else{
 
-				$id2=getAccountInfoByPhone($phone,'id');
-				$sponser=getAccountInfoByPhone($phone,'gid');
-				
-				$no=getNoofRows($id2);
-
-			    if ($no<7) {
-
-			    	$query="INSERT INTO accounts (firstname,lastname,address,shipping,country,sponsorNumber,dateofbirth,gender,phone,password,email, activation_code,gid,entry_date,sponsorId) VALUES ('$firstname','$lastname','$address','$shipping','$country','$sponder','$dateofbirth','$gender','$phone2','$password','$email','$uniqid','$gid','$date','$sponser')";
-
-			    	mysqli_query($con,$query);
-
-	     	        $sql2 = "INSERT INTO relationship (upline, downline, linelevel) VALUES ('$id2','$gid','1')";
-	     	        
-			        if(mysqli_query($con, $sql2)){
-					    echo "Records added successfully.";
-					} else{
-					    echo "ERROR: Could not able to execute sql. " . mysqli_error($con);
-					}
-
-			    }else{
-
-
-		  	         $sql4 ="SELECT * FROM relationship WHERE upline='$id2'";
-				     $result = mysqli_query(db_connection(), $sql4);
-
-				     if (mysqli_num_rows($result) > 0) {
-				        while($row = mysqli_fetch_assoc($result)) {
-
-				            $downline=$row["downline"];
- 
-				            $upline=getAccountInfoBygid($downline,'id');
-				            $gid2=getAccountInfoBygid($downline,'gid');
-
-				            $Downphone=getAccountInfoBygid($downline,'phone');
-
-				            $canceledsum=mysqli_query(db_connection(),"SELECT COUNT(*) AS totalcanceled FROM relationship WHERE upline='$upline'");
-				            $d=mysqli_fetch_assoc($canceledsum);
-
-				            if($d['totalcanceled']==0){
-				            	echo 'here';
-				            	$query="INSERT INTO accounts (firstname,lastname,address,shipping,country,sponsorNumber,dateofbirth,gender,phone,password,email, activation_code,gid,entry_date,sponsorId) VALUES ('$firstname','$lastname','$address','$shipping','$country','$Downphone','$dateofbirth','$gender','$phone2','$password','$email','$uniqid','$gid','$date','$gid2')";
-
-			    	              mysqli_query($con,$query);
-
-				            	$sql2 = "INSERT INTO relationship (upline, downline, linelevel) VALUES ('$upline','$gid','1')";
-						        @mysqli_query($con, $sql2);
-
-				                break;
-				            }elseif($d['totalcanceled']==1){
-
-				            	echo 'here 2';
-
-				            	$query="INSERT INTO accounts (firstname,lastname,address,shipping,country,sponsorNumber,dateofbirth,gender,phone,password,email, activation_code,gid,entry_date,sponsorId) VALUES ('$firstname','$lastname','$address','$shipping','$country','$sponder','$dateofbirth','$gender','$Downphone','$password','$email','$uniqid','$gid','$date','$gid2')";
-
-			    	              mysqli_query($con,$query);
-
-				                $sql2 = "INSERT INTO relationship (upline, downline, linelevel) VALUES ('$upline','$gid','1')";
-						        @mysqli_query($con, $sql2);
-				                break;
-
-				            }elseif($d['totalcanceled']==2){
-
-				            	$query="INSERT INTO accounts (firstname,lastname,address,shipping,country,sponsorNumber,dateofbirth,gender,phone,password,email, activation_code,gid,entry_date,sponsorId) VALUES ('$firstname','$lastname','$address','$shipping','$country','$Downphone','$dateofbirth','$gender','$phone2','$password','$email','$uniqid','$gid','$date','$gid2')";
-
-			    	              mysqli_query($con,$query);
-
-				                $sql2 = "INSERT INTO relationship (upline, downline, linelevel) VALUES ('$upline','$gid','1')";
-						        @mysqli_query($con, $sql2);
-				                break;
-
-				            }elseif($d['totalcanceled']==3){
-
-				            	$query="INSERT INTO accounts (firstname,lastname,address,shipping,country,sponsorNumber,dateofbirth,gender,phone,password,email, activation_code,gid,entry_date,sponsorId) VALUES ('$firstname','$lastname','$address','$shipping','$country','$Downphone','$dateofbirth','$gender','$phone2','$password','$email','$uniqid','$gid','$date','$gid2')";
-
-			    	              mysqli_query($con,$query);
-
-				                $sql2 = "INSERT INTO relationship (upline, downline, linelevel) VALUES ('$upline','$gid','1')";
-						        @mysqli_query($con, $sql2);
-				                break;
-
-				            }elseif($d['totalcanceled']==4){
-
-				            	$query="INSERT INTO accounts (firstname,lastname,address,shipping,country,sponsorNumber,dateofbirth,gender,phone,password,email, activation_code,gid,entry_date,sponsorId) VALUES ('$firstname','$lastname','$address','$shipping','$country','$Downphone','$dateofbirth','$gender','$phone2','$password','$email','$uniqid','$gid','$date','$gid2')";
-
-			    	              mysqli_query($con,$query);
-
-				                $sql2 = "INSERT INTO relationship (upline, downline, linelevel) VALUES ('$upline','$gid','1')";
-						        @mysqli_query($con, $sql2);
-				                break;
-
-				            }elseif($d['totalcanceled']==5){
-
-				            $query="INSERT INTO accounts (firstname,lastname,address,shipping,country,sponsorNumber,dateofbirth,gender,phone,password,email, activation_code,gid,entry_date,sponsorId) VALUES ('$firstname','$lastname','$address','$shipping','$country','$Downphone','$dateofbirth','$gender','$phone2','$password','$email','$uniqid','$gid','$date','$gid2')";
-
-			    	              mysqli_query($con,$query);
-
-				                $sql2 = "INSERT INTO relationship (upline, downline, linelevel) VALUES ('$upline','$gid','1')";
-						        @mysqli_query($con, $sql2);
-				                break;
-
-				            }elseif($d['totalcanceled']==6){
-
-				            $query="INSERT INTO accounts (firstname,lastname,address,shipping,country,sponsorNumber,dateofbirth,gender,phone,password,email, activation_code,gid,entry_date,sponsorId) VALUES ('$firstname','$lastname','$address','$shipping','$country','$Downphone','$dateofbirth','$gender','$phone2','$password','$email','$uniqid','$gid','$date','$gid2')";
-
-			    	              mysqli_query($con,$query);
-
-				                $sql2 = "INSERT INTO relationship (upline, downline, linelevel) VALUES ('$upline','$gid','1')";
-						        @mysqli_query($con, $sql2);
-				                break;
-
-				            }
-				        }
-				    } else {
-				        echo " ..0 results 1";
-				    }
-			    }
+				registerUpline($firstname,$lastname,$address,$shipping,$country,$sponder,$dateofbirth,$gender,$phone2,$password,$email,$uniqid,$gid,$date,$sponser);
 			}
 
 			//save_downline($phone,$gid);
@@ -214,21 +84,28 @@ if ($stmt = $con->prepare('SELECT id, password FROM accounts WHERE email = ? and
 			$from    = 'noreply@basiksservices.com';
             $subject = 'Account Activation Required';
 
-			$activate_link = 'http://demo.basiksservices.com/activate.php?email=' . $_POST['email'] . '&code=' . $uniqid;
+			$activate_link = 'http://demo.basiksservices.com/include/activate.php?email=' . $_POST['email'] . '&code=' . $uniqid;
 
 			$message = 'Please click the following link to activate your account:   ' . $activate_link . '';
 
 			mail($_POST['email'], $subject, $message);
 			header('Location:../login.php');
+
 		} else {
 			// Something is wrong with the sql statement, check to make sure accounts table exists with all 3 fields.
 			echo 'Could not prepare statement!';
 		}
 	}
+
 	$stmt->close();
+
 } else {
+
 	// Something is wrong with the sql statement, check to make sure accounts table exists with all 3 fields.
 	echo 'Could not prepare statement!';
+	
 }
+
 $con->close();
+
 ?>

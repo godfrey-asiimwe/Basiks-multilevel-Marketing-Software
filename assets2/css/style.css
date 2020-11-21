@@ -201,8 +201,8 @@ select.form-control:not([size]):not([multiple]) {
   .form-group .control-label,
   .form-group > label {
     font-weight: 600;
-    color: #34395e;
-    font-size: 12px;
+    color:#34395e;
+    font-size: 13px;
     letter-spacing: .5px; }
   .form-group.floating-addon {
     position: relative; }
@@ -637,7 +637,7 @@ select.form-control:not([size]):not([multiple]) {
       .card .card-header .form-control + .input-group-btn .btn {
         margin-top: -1px; }
     .card .card-header h4 {
-      font-size: 16px;
+      font-size: 23px;
       line-height: 28px;
       color:#00cc00;
       padding-right: 10px;
